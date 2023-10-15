@@ -45,7 +45,7 @@
  */
 
 #include <gsl/gsl_linalg.h>
-
+#include <math.h>
 #include "../main/allvars.h"
 #include "../main/proto.h"
 
@@ -120,7 +120,9 @@ void set_pressure_of_cell(int i) { set_pressure_of_cell_internal(P, SphP, i); }
 void set_pressure_of_cell_internal(struct particle_data *localP, struct sph_particle_data *localSphP, int i)
 {
 #ifdef ISOTHERM_EQS
-  localSphP[i].Pressure = localSphP[i].Density * All.IsoSoundSpeed * All.IsoSoundSpeed;
+  // localSphP[i].Pressure = localSphP[i].Density * All.IsoSoundSpeed * All.IsoSoundSpeed;
+  double csnd = getSoundSpeedIso(globalSoundSpeedOption, All.IsoSoundSpeed, All.Time);
+  localSphP[i].Pressure = localSphP[i].Density * pow(csnd, 2);
 #else  /* #ifdef ISOTHERM_EQS */
 
   if(localSphP[i].Utherm >= 0)
@@ -317,7 +319,7 @@ double get_sound_speed(int p)
   double csnd;
 
 #ifdef ISOTHERM_EQS
-  csnd = All.IsoSoundSpeed;
+  csnd = getSoundSpeedIso(globalSoundSpeedOption, All.IsoSoundSpeed, All.Time);
 #else  /* #ifdef ISOTHERM_EQS */
 
   double gamma;

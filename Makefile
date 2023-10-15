@@ -166,6 +166,7 @@ OBJS =   debug_md5/calc_checksum.o \
          io/read_ic.o \
          io/restart.o \
          main/allvars.o \
+         main/sound_speed.o \
          main/main.o \
          main/run.o \
          mesh/criterion_derefinement.o \
@@ -215,6 +216,7 @@ INCL += debug_md5/Md5.h \
         gitversion/version.h\
         gravity/forcetree.h \
         main/allvars.h \
+        main/sound_speed.h \
         main/proto.h \
         mesh/mesh.h \
         mesh/voronoi/voronoi.h \

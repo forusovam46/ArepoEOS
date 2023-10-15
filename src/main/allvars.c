@@ -324,3 +324,15 @@ int MaxThreads = 1;
 IO_Field *IO_Fields;
 int N_IO_Fields   = 0;
 int Max_IO_Fields = 0;
+
+/*
+ * Options for thermal evolution:
+ * - NO (Default option - uses the value defined in parameters as originally i.e. no thermal evolution)
+ * - CONSTANT (Uses predefined constant values defined in sound_speed.c)
+ * - LINEAR (Uses predefined linear values defined in sound_speed.c)
+ * - POLYNOMIAL_PIECEWISE (Uses predefined polynomial piecewise values defined in sound_speed.c)
+ */
+
+#ifdef ISOTHERM_EQS
+SoundSpeedOption globalSoundSpeedOption = NO;
+#endif

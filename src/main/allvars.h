@@ -42,6 +42,7 @@
 #include <stdio.h>
 
 #include "./arepoconfig.h"
+#include "sound_speed.h"
 
 #ifdef IMPOSE_PINNING
 #include <hwloc.h>
@@ -1924,5 +1925,9 @@ extern double fac;
 #endif /* #ifdef STATICNFW */
 
 extern int MaxThreads;
+
+#ifdef ISOTHERM_EQS
+extern SoundSpeedOption globalSoundSpeedOption;
+#endif
 
 #endif /* #define ALLVARS_H */

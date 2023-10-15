@@ -167,7 +167,7 @@ double godunov_flux_3d(struct state *st_L, struct state *st_R, struct state_face
   double Rho;
   double csnd;
 
-  csnd = All.IsoSoundSpeed;
+  csnd = getSoundSpeedIso(globalSoundSpeedOption, All.IsoSoundSpeed, All.Time);
   riemann_isotherm(st_L, st_R, &Rho, &Vel, csnd);
 
   sample_solution_isothermal3d(0.0, /* S=x/t */
