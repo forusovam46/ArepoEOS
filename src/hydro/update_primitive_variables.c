@@ -120,7 +120,7 @@ void set_pressure_of_cell(int i) { set_pressure_of_cell_internal(P, SphP, i); }
 void set_pressure_of_cell_internal(struct particle_data *localP, struct sph_particle_data *localSphP, int i)
 {
 #ifdef ISOTHERM_EQS
-  localSphP[i].Pressure = localSphP[i].Density * All.IsoSoundSpeed * All.IsoSoundSpeed;
+  localSphP[i].Pressure = localSphP[i].Density * (-36.52 * All.Time + All.IsoSoundSpeed) * (-36.52 * All.Time + All.IsoSoundSpeed) ; /* MFO EOS All.IsoSoundSpeed * All.IsoSoundSpeed; */
 #else  /* #ifdef ISOTHERM_EQS */
 
   if(localSphP[i].Utherm >= 0)
@@ -317,7 +317,10 @@ double get_sound_speed(int p)
   double csnd;
 
 #ifdef ISOTHERM_EQS
-  csnd = All.IsoSoundSpeed;
+/*  csnd = All.IsoSoundSpeed;*/
+/*  we substitute time dependent sound speed as the 'messured' one in a simulation with strong baryonic feedback (EX1)
+    (therefore not really ISOTHERM dont forget to make a new FLAG for this) MFO   */
+csnd = -36.52 * All.Time + All.IsoSoundSpeed;
 #else  /* #ifdef ISOTHERM_EQS */
 
   double gamma;
