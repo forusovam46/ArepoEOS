@@ -24,3 +24,31 @@ and displayed by opening `./documentation/build/html/index.html`.
 
 A full version of the user guide is also available on the Arepo 
 homepage.
+
+---
+
+This EOS Version (Master's Thesis 2024)
+---------------------------------------
+
+This version of AREPO attempted to extend the `ISOTHERM_EQS` flag to incorporate optional thermal evolution.
+
+Key Features of the Attempt:
+- **Thermal Evolution Models**:
+  Introduced a `SoundSpeedOption` enum with the following options:
+  - `NO`: Default behavior using a constant sound speed as per `param.txt`.
+  - `CONSTANT`: Predefined constant values for sound speed.
+  - `LINEAR`: Linearly evolving sound speed as a function of the scale factor.
+  - `POLYNOMIAL_PIECEWISE`: Piecewise polynomial fit for sound speed evolution.
+
+- **Configuration**:
+  Configured in `allvars.c` for ease of modification. Default values/functions were derived from the CAMELS CV0 simulations.
+
+- **Implementation**:
+  - New files `sound_speed.c` and `sound_speed.h` implement the evolution logic.
+  - Added `getSoundSpeedIso` function to compute sound speed based on the selected model.
+  - Updated `allvars.h` to include the `SoundSpeedOption` enum.
+
+Limitations:
+This approach faced challenges, including instability in cosmological volume simulations, particularly with negative density values. It became evident that the `ISOTHERM_EQS` flag in its original implementation was unsuitable for the project's scientific goals. This led to a reevaluation and subsequent developments in a more robust version.
+
+For details on the revised model, visit to the second repository [here](https://github.com/forusovam46/ArepoEOS2).
